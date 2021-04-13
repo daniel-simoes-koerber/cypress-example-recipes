@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 // login just once using API
-let user
+let authenticatedUser = ''
 
 before(function fetchUser () {
   cy.request('POST', 'http://localhost:4000/users/authenticate', {
@@ -10,7 +10,7 @@ before(function fetchUser () {
   })
   .its('body')
   .then((res) => {
-    user = res
+    authenticatedUser = res
   })
 })
 
@@ -21,7 +21,7 @@ beforeEach(function setUser () {
     onBeforeLoad (win) {
       // and before the page finishes loading
       // set the user object in local storage
-      win.localStorage.setItem('user', JSON.stringify(user))
+      win.localStorage.setItem('user', JSON.stringify(authenticatedUser))
     },
   })
   // the page should be opened and the user should be logged in
@@ -34,7 +34,7 @@ describe('JWT', () => {
     cy.request({
       url: 'http://localhost:4000/users',
       auth: {
-        bearer: user.token,
+        bearer: authenticatedUser.token,
       },
     })
     .its('body')
