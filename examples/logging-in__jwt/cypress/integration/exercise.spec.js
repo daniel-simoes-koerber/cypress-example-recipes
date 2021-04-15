@@ -24,5 +24,11 @@ beforeEach(function setUser () {
 })
 
 describe('bypassing login through UI', () => {
-  //Your test code here
+  it('shows logged in user', () => {
+    // your test code here
+  })
+
+  it('should log out', () => {
+    //your test code here
+  })
 })
