@@ -23,7 +23,7 @@ beforeEach(function setUser () {
   window.localStorage.setItem('user', JSON.stringify(authenticatedUser))
 })
 
-describe('bypassing login through UI', () => {
+describe('bypassing UI login', () => {
   it('shows logged in user', () => {
     // your test code here
   })
