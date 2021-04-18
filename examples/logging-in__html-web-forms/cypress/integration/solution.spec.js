@@ -1,11 +1,15 @@
 /// <reference types="cypress" />
 
-describe('Logging In - HTML Web Form - Efficiently', function () {
+describe('Logging In - HTML Web Form', function () {
   // we can use these values to log in
   const username = 'jane.lane'
   const password = 'password123'
 
-  context('HTML form submission', function () {
+  context('HTML form submission through UI', function () {
+    beforeEach(() => {
+      cy.clearCookies()
+    })
+
     // an e2e test validating the correct app behavior
     it('logs in through the UI', function () {
       cy.visit('/login')
@@ -42,14 +46,12 @@ describe('Logging In - HTML Web Form - Efficiently', function () {
           password,
         },
       })
-
-      // just to prove we have a session
-      cy.getCookie('cypress-session-cookie').should('exist')
     })
   })
 
-  context('Accessing secure resouces without UI', () => {
+  context('Exercises: login without UI', () => {
     beforeEach(() => {
+      cy.clearCookies()
       // arrange
       cy.request({
         method: 'POST',
@@ -63,20 +65,43 @@ describe('Logging In - HTML Web Form - Efficiently', function () {
     })
 
     it('can visit /dashboard', () => {
-      // act
+      /**
+       * Your code below here
+       */
+      //1. use cy to visit('/dashboard')
       cy.visit('/dashboard')
-      // assert
+      //2. use cy.get() to find an element that should('contain.text', 'Welcome to the Dashboard, jane.lane!')
       cy.get('h1').should('contain.text', 'Welcome to the Dashboard, jane.lane!')
+      /**
+       * Your code above here
+       */
     })
 
     it('can visit /users', () => {
+      /**
+       * Your code below here
+       */
+      //1. use cy to visit the correct url
       cy.visit('/users')
-      cy.get('h1').should('contain', 'Users')
+      //2. use cy.get() to find an element that should('contain.text', 'Users')
+      cy.get('h1').should('contain.text', 'Users')
+      /**
+       * Your code above here
+       */
     })
 
     it('can visit /admin', () => {
+      /**
+       * Your code below here
+       */
+
+      //do the same thing, just with a different url and text
       cy.visit('/admin')
       cy.get('h1').should('contain', 'Admin')
+
+      /**
+       * Your code above here
+       */
     })
   })
 })

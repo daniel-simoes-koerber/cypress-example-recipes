@@ -5,7 +5,11 @@ describe('Logging In - HTML Web Form', function () {
   const username = 'jane.lane'
   const password = 'password123'
 
-  context('HTML form submission', function () {
+  context('HTML form submission through UI', function () {
+    beforeEach(() => {
+      cy.clearCookies()
+    })
+
     // an e2e test validating the correct app behavior
     it('logs in through the UI', function () {
       cy.visit('/login')
@@ -42,9 +46,56 @@ describe('Logging In - HTML Web Form', function () {
           password,
         },
       })
+    })
+  })
 
-      // just to prove we have a session
-      cy.getCookie('cypress-session-cookie').should('exist')
+  context('Exercises: login without UI', () => {
+    beforeEach(() => {
+      cy.clearCookies()
+      // arrange
+      cy.request({
+        method: 'POST',
+        url: '/login', // baseUrl in cypress.json will be prepended to this url
+        form: true, // indicates the body should be form urlencoded and sets Content-Type: application/x-www-form-urlencoded headers
+        body: {
+          username,
+          password,
+        },
+      })
+    })
+
+    it('can visit /dashboard', () => {
+      /**
+       * Your code below here
+       */
+      //1. use cy to visit('/dashboard')
+      //2. use cy.get() to find an element that should('contain.text', 'Welcome to the Dashboard, jane.lane!')
+      /**
+       * Your code above here
+       */
+    })
+
+    it('can visit /users', () => {
+      /**
+       * Your code below here
+       */
+      //1. use cy to visit the correct url
+      //2. use cy.get() to find an element that should('contain.text', 'Users')
+      /**
+       * Your code above here
+       */
+    })
+
+    it('can visit /admin', () => {
+      /**
+       * Your code below here
+       */
+
+      //do the same thing, just with a different url and text
+
+      /**
+       * Your code above here
+       */
     })
   })
 })

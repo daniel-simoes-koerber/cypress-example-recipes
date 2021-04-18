@@ -26,9 +26,12 @@ beforeEach(function setUser () {
 describe('bypassing UI login', () => {
   it('shows logged in user', () => {
     // your test code here
+    //1. use cy.contains('li', 'Test User').should('be.visible')
   })
 
   it('should log out', () => {
     //your test code here
+    //1. use cy.get('ELEMENT').click() to click on the link
+    //2. use cy.contains('ELEMENT', 'TEXT').should('TRUE CONDITION') to assert
   })
 })

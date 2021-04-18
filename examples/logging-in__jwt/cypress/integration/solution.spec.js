@@ -25,11 +25,12 @@ beforeEach(function setUser () {
 
 describe('bypassing login through UI', () => {
   it('shows logged in user', () => {
-    // this user information came from authenticated XHR call
+    // use contains() to check for a select with a specific text
     cy.contains('li', 'Test User').should('be.visible')
   })
 
   it('should log out', () => {
+    // use get() to retrieve an element to act on
     cy.get('[href="/login"]').click()
     cy.contains('h2', 'Login').should('be.visible')
   })
